@@ -1,0 +1,16 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 17 nov. 2022, 23:28:17
+    Author     : MICHAEL
+*/
+.bg-body-personalizado{
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%)!important;
+}
+.bg-card-personalizado{
+    background-image: linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5)),
+    url("https://img.freepik.com/vector-premium/lindo-camino-impresion-pata-gato-vector-gratuito_563808-55.jpg?w=2000");
+}
+
