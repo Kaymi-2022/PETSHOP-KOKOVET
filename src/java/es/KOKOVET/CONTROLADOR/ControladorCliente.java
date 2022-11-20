@@ -8,19 +8,22 @@ import es.KOKOVET.MODEL.Cliente;
 import es.KOKOVET.MODEL.ClienteDAO;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author MICHAEL
  */
-@WebServlet(name = "ControladorRegistroCliente", urlPatterns = {"/ControladorRegistroCliente"})
+@WebServlet(name = "ControladorCliente", urlPatterns = {"/ControladorCliente"})
+@MultipartConfig
 public class ControladorCliente extends HttpServlet {
 
     ClienteDAO cdao = new ClienteDAO();
@@ -29,29 +32,6 @@ public class ControladorCliente extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ID = request.getParameter("inputID");
-        String DNI = request.getParameter("inputDNI");
-        String nombre = request.getParameter("inputNombre");
-        String apellidos = request.getParameter("inputApellidos");
-        String telefono = request.getParameter("inputTelefono");
-        String email = request.getParameter("inputEmail");
-        String clave = request.getParameter("inputPassword");
-        String departamento = request.getParameter("inputDepartamento");
-        String distrito = request.getParameter("inputDistrito");
-        String direccion = request.getParameter("inputDireccion");
-        Part part = request.getPart("FileFoto");
-        InputStream inputstream = part.getInputStream();
-        c.setDNI(DNI);
-        c.setNombre(nombre);
-        c.setApellidos(apellidos);
-        c.setTelefono(telefono);
-        c.setEmail(email);
-        c.setPassword(clave);
-        c.setDepartamento(departamento);
-        c.setDistrito(distrito);
-        c.setDireccion(direccion);
-        c.setFoto(inputstream);
-        cdao.AgregarClientes(c);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -82,7 +62,22 @@ public class ControladorCliente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        String accion = request.getParameter("accion");
+        String user = request.getParameter("imputCorreo");
+        String pass = request.getParameter("imputPassword");
+        if (accion.equals("Iniciar Sesion")) {
+            if (user.equals("maicol@hotmail.com") && pass.equals("123")) {
+                RequestDispatcher rd = request.getRequestDispatcher("./VISTAS/index.jsp");
+                rd.forward(request, response);
+            } else {
+                RequestDispatcher rd = request.getRequestDispatcher("./VISTAS/Login.jsp");
+                rd.forward(request, response);
 
+            }  
+        }
+        processRequest(request, response);
     }
 
     /**

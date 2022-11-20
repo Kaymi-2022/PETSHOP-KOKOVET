@@ -88,8 +88,8 @@ public class Controlador extends HttpServlet {
                 c.setFoto(inputstream);
                 cdao.AgregarClientes(c);
                 url = destino;
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
-                requestDispatcher.forward(request, response);
+                miDispatcher = request.getRequestDispatcher(url);
+                miDispatcher.forward(request, response);
                 break;
             case "ListarClientes":
                 request.setAttribute("Listar", listacliente);
