@@ -21,7 +21,7 @@
                 <div class="container-fluid">
                     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                         <a href="/" class="align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                            <img src="../IMG/logo.png" alt="">
+                            <img src="./IMG/logo.png" alt="">
                         </a>
                         <ul class="nav col-lg-auto my-2 justify-content-center my-md-0 text-small fs-2">
                             <li>
@@ -55,7 +55,7 @@
                         <div class="flex-shrink-0 dropdown align-center">
                             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="user"
                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../IMG/MichaelMaster.jfif" alt="mdo" width="32" height="32"
+                                <img src="./IMG/MichaelMaster.jfif" alt="mdo" width="32" height="32"
                                      class="rounded-circle">
                             </a>
                             <ul class="dropdown-menu text-small shadow" aria-labelledby="user">

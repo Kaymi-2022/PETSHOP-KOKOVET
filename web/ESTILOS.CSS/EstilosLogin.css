@@ -360,7 +360,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
   .container{
     background-image: linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5)),
-                  url("https://img.freepik.com/vector-premium/lindo-camino-impresion-pata-gato-vector-gratuito_563808-55.jpg?w=2000");
+                  url("https://img.freepik.com/vector-premium/lindo-camino-impresion-pata-gato-vector-gratuito_563808-55.jpg?w=2000")!important;
+  }
+  
+    .fondo-perzonalizado{
+    background-image: linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5)),
+                  url("https://img.freepik.com/vector-premium/lindo-camino-impresion-pata-gato-vector-gratuito_563808-55.jpg?w=2000")!important;
   }
   
 

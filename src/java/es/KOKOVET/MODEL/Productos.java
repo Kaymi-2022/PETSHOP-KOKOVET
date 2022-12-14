@@ -2,17 +2,17 @@ package es.KOKOVET.MODEL;
 
 import java.io.InputStream;
 
-/**
- *
- * @author MICHAEL
- */
 public class Productos {
     int id;
-    String nombres;
+    String nombres;    
     InputStream foto;
     String descripcion;
     double precio;
     int stock;
+  
+
+    public Productos() {
+    }
 
     public Productos(int id, String nombres, InputStream foto, String descripcion, double precio, int stock) {
         this.id = id;
@@ -20,17 +20,6 @@ public class Productos {
         this.foto = foto;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.stock = stock;
-    }
-
-    public Productos() {
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
         this.stock = stock;
     }
 
@@ -74,6 +63,14 @@ public class Productos {
         this.precio = precio;
     }
 
-    
+    public int getStock() {
+        return stock;
+    }
 
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+
+    
 }

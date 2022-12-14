@@ -7,11 +7,11 @@ function abrirNavegador() {
 
 function cerrarVentana() {
     document.querySelector(".modal-navegacontenedor").style.transform="translateX(-150%)";
-    document.querySelector(".contenedor-modal").style.opacity = "hidden";
+    document.querySelector(".contenedor-modal").style.opacity = "0";
     document.querySelector(".contenedor-modal").style.transition = "15s";
 }
 function producto(){
-    window.location.replace="http://localhost:8080/PETSHOP/VISTAS/FormularioRegistrarse.jsp";
+    window.location.href="Controller?accion=home";
 }
 function inicio(){
     window.location.href="../index.html";
@@ -21,5 +21,5 @@ function RegistrarseLogin(){
 }
 
 function abrirLogin(){
-    window.location.assign("http://localhost:8080/PETSHOP/VISTAS/Login.html");
+    window.location.assign("http://localhost:8080/PETSHOP/VISTAS/Login.jsp");
 }

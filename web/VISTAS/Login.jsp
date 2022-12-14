@@ -1,6 +1,6 @@
 <%-- 
     Document   : Login
-    Created on : 20 nov. 2022, 00:18:25
+    Created on : 2 dic. 2022, 01:53:19
     Author     : MICHAEL
 --%>
 
@@ -9,12 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="../ESTILOS.CSS/EstilosLogin.css"/>
+        <link rel="stylesheet" href="./ESTILOS.CSS/EstilosLogin.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="sweetalert2.min.css">
+        <title>Login Perrito</title>
     </head>
     <body class="container">
+
         <div class="center">
             <div class="ear ear--left"></div>
             <div class="ear ear--right"></div>
@@ -75,29 +76,54 @@
                     </div>
                 </div>
             </div>
-            <form action="../ControladorCliente" method="POST" enctype="multipart/form-data">
+            <form action="./ControladorCarrito?accion=Validar" method="POST" enctype="multipart/form-data" class="row">
                 <div class="login">
                     <label>
                         <div class="fa fa-phone"></div>
-                        <input class="username" type="email" name="imputCorreo" autocomplete="on" placeholder="Ingrese su Correo"/>
+                        <input class="username" type="email" name="txtemail" autocomplete="on" placeholder="Ingrese su Correo">
                     </label>
                     <label>
                         <div class="fa fa-commenting"></div>
-                        <input class="password" type="password" name="imputPassword" autocomplete="off" placeholder="Password"/>
+                        <input type="password" name="txtpass" autocomplete="off" placeholder="Password">
                         <!--<button class="password-button">ver</button> -->
                     </label>
-                    <input class="login-button" role="button" type="submit" name="accion" value="Iniciar Sesion">
                 </div>
                 <div class="footer">Login</div>
                 <div class="footer">
                     <a onclick="RegistrarseLogin()" class="btn btn-danger">Registrarse</a>
                 </div>
+                <label class="login">
+                    <input type="submit" name="accion" value="Validar" class="login-button" role="button">
+                </label>
             </form>
-        </div>
-        <script src="../FUNCIONALIDADES/FuncionLogin.js" type="text/javascript"></script>
-        <script src="../FUNCIONALIDADES/FuncionNavegacion.js" type="text/javascript"></script>
+            <div class="footer">Login</div>
+            <div class="footer">
+                <a onclick="RegistrarseLogin()" class="btn btn-danger">Registrarse</a>
+            </div>
+        </div><a class="inspiration" href="https://dribbble.com/shots/4485321-Login-Page-Homepage" target="_blank" rel="noopener"><img src="https://cdn.dribbble.com/assets/logo-footer-hd-a05db77841b4b27c0bf23ec1378e97c988190dfe7d26e32e1faea7269f9e001b.png" alt="inspiration"/></a>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        <script src="./FUNCIONALIDADES/FuncionLogin.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.38/sweetalert2.all.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.38/sweetalert2.all.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+        <%
+            if (request.getAttribute("message") != null) {
+        %>
+        <script>
+                $(document).ready(function () {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                            title: '<%= request.getAttribute("message")%>',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                });
+        </script>
+        <%
+            }
+        %>
     </body>
-</body>
 </html>

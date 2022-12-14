@@ -1,40 +1,34 @@
 
 package es.KOKOVET.MODEL;
 
-import java.io.InputStream;
-
-/**
- *
- * @author MICHAEL
- */
 public class Cliente {
     int id;
-    String DNI;
-    String nombre;
-    String apellidos;
-    String telefono;
-    String email;
-    String password;
-    String departamento;
-    String distrito;
-    String direccion;
-    InputStream foto;
-
+    String dni;
+    String Nombres;
+    String Apellidos;
+    String Direccion;
+    String Email;
+    String Pass;
+    String Telefono;
+    String Distrito;
+    int Rol;
+    int Estado;
+    
     public Cliente() {
     }
 
-    public Cliente(int id, String DNI, String nombre, String apellidos, String telefono, String email, String password, String departamento, String distrito, String direccion, InputStream foto) {
+    public Cliente(int id, String dni, String Nombres, String Apellidos, String direccion, String email, String pass, String Telefono, String Distrito, int Rol, int Estado) {
         this.id = id;
-        this.DNI = DNI;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.telefono = telefono;
-        this.email = email;
-        this.password = password;
-        this.departamento = departamento;
-        this.distrito = distrito;
-        this.direccion = direccion;
-        this.foto = foto;
+        this.dni = dni;
+        this.Nombres = Nombres;
+        this.Apellidos = Apellidos;
+        this.Direccion = direccion;
+        this.Email = email;
+        this.Pass = pass;
+        this.Telefono = Telefono;
+        this.Distrito = Distrito;
+        this.Rol = Rol;
+        this.Estado = Estado;
     }
 
     public int getId() {
@@ -45,87 +39,86 @@ public class Cliente {
         this.id = id;
     }
 
-    public String getDNI() {
-        return DNI;
+    public String getDni() {
+        return dni;
     }
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombres() {
+        return Nombres;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String Nombres) {
+        this.Nombres = Nombres;
     }
 
     public String getApellidos() {
-        return apellidos;
+        return Apellidos;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
-
-    public String getDistrito() {
-        return distrito;
-    }
-
-    public void setDistrito(String distrito) {
-        this.distrito = distrito;
+    public void setApellidos(String Apellidos) {
+        this.Apellidos = Apellidos;
     }
 
     public String getDireccion() {
-        return direccion;
+        return Direccion;
     }
 
     public void setDireccion(String direccion) {
-        this.direccion = direccion;
+        this.Direccion = direccion;
     }
 
-    public InputStream getFoto() {
-        return foto;
+    public String getEmail() {
+        return Email;
     }
 
-    public void setFoto(InputStream foto) {
-        this.foto = foto;
+    public void setEmail(String email) {
+        this.Email = email;
+    }
+
+    public String getPass() {
+        return Pass;
+    }
+
+    public void setPass(String pass) {
+        this.Pass = pass;
+    }
+
+    public String getTelefono() {
+        return Telefono;
+    }
+
+    public void setTelefono(String Telefono) {
+        this.Telefono = Telefono;
+    }
+
+    public String getDistrito() {
+        return Distrito;
+    }
+
+    public void setDistrito(String Distrito) {
+        this.Distrito = Distrito;
+    }
+
+    public int getRol() {
+        return Rol;
+    }
+
+    public void setRol(int Rol) {
+        this.Rol = Rol;
+    }
+
+    public int getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(int Estado) {
+        this.Estado = Estado;
     }
 
 
-
-        
+    
 }

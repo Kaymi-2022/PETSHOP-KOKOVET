@@ -54,7 +54,7 @@
                                         <img src="../IMG/marcas/producto_canbo.jpg" class="d-block w-100" alt="...">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="../IMG/marcas/producto_catshow.png" class="d-block w-100" alt="...">
+                                        <img src="./IMG/marcas/producto_catshow.png" class="d-block w-100" alt="...">
                                     </div>
                                     <div class="carousel-item">
                                         <img src="../IMG/marcas/producto_friskies.png" class="d-block w-100" alt="...">

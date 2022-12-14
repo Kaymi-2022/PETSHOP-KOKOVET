@@ -1,115 +1,182 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package es.KOKOVET.MODEL;
 
 import es.KOKOVET.CONEXION.ConexionBD;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author MICHAEL
- */
 public class ClienteDAO {
 
     Connection con;
-    ConexionBD conexion = new ConexionBD();
+    ConexionBD cn = new ConexionBD();
     PreparedStatement ps;
     ResultSet rs;
 
-    public List ListarClientes() {
-        List<Cliente> listclientes = new ArrayList<>();
-        String sql = "SELECT * FROM CLIENTE";
+    public List listar() {
+        List<Cliente> clientes = new ArrayList<>();
+        String sql = "select * from cliente";
+
         try {
-            con = conexion.getConnection();
+            con = cn.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Cliente c = new Cliente();
                 c.setId(rs.getInt(1));
-                c.setDNI(rs.getString(2));
-                c.setNombre(rs.getString(3));
+                c.setDni(rs.getString(2));
+                c.setNombres(rs.getString(3));
                 c.setApellidos(rs.getString(4));
-                c.setTelefono(rs.getString(5));
+                c.setDireccion(rs.getString(5));
                 c.setEmail(rs.getString(6));
-                c.setPassword(rs.getString(7));
-                c.setDepartamento(rs.getString(8));
+                c.setPass(rs.getString(7));
+                c.setTelefono(rs.getString(8));
                 c.setDistrito(rs.getString(9));
-                c.setDireccion(rs.getString(10));
-                c.setFoto(rs.getBinaryStream(11));
-                listclientes.add(c);
+                c.setRol(rs.getInt(10));
+                c.setEstado(rs.getInt(11));
+                clientes.add(c);
             }
         } catch (Exception e) {
 
         }
 
-        return listclientes;
+        return clientes;
     }
 
-    public void listarImg(int id, HttpServletResponse response) {
-        String sql = "SELECT * FROM CLIENTE WHERE idCliente="+id;
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
-        BufferedInputStream bufferedInputStream = null;
-        BufferedOutputStream bufferedOutputStream = null;
-
+    public Cliente Validar(String email, String pass) {
+        String sql = "select * from cliente where Email=? and Password=? and Estado=" + 1;
+        Cliente c = new Cliente();
         try {
-            outputStream = response.getOutputStream();
-            con = conexion.getConnection();
+            con = cn.getConnection();
             ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, pass);
             rs = ps.executeQuery();
-            if (rs.next()) {
-                inputStream = rs.getBinaryStream("Foto");
-            } else {
+            while (rs.next()) {
+                c.setId(rs.getInt(1));
+                c.setDni(rs.getString(2));
+                c.setNombres(rs.getString(3));
+                c.setApellidos(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setEmail(rs.getString(6));
+                c.setPass(rs.getString(7));
+                c.setTelefono(rs.getString(8));
+                c.setDistrito(rs.getString(9));
+                c.setRol(rs.getInt(10));
+                c.setEstado(rs.getInt(11));
             }
-            bufferedInputStream = new BufferedInputStream(inputStream);
-            bufferedOutputStream = new BufferedOutputStream(outputStream);
-            int i = 0;
-            while ((i = bufferedInputStream.read()) != -1) {
-                bufferedOutputStream.write(i);
-            }
-        } catch (IOException | SQLException e) {
-
+        } catch (Exception e) {
         }
+        return c;
     }
 
-    public void AgregarClientes(Cliente clientes) {
-        String sql = "INSERT INTO cliente(idcliente,Dni, Nombres, apellidoCliente, telefono, Email, Password, departamento, distrito, Direccion, Foto)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-//        String sql = "INSERT INTO CLIENTE VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-
+    public int AgregarCliente(Cliente c) {
+        String sql = "INSERT INTO cliente (Dni, Nombres,Apellidos,Direccion,Email,"
+                + "Password,Telefono,Distrito)values(?,?,?,?,?,?,?,?)";
         try {
-            con = conexion.getConnection();
+            con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, clientes.getId());
-            ps.setString(2, clientes.getDNI());
-            ps.setString(3, clientes.getNombre());
-            ps.setString(4, clientes.getApellidos());
-            ps.setString(5, clientes.getTelefono());
-            ps.setString(6, clientes.getEmail());
-            ps.setString(7, clientes.getPassword());
-            ps.setString(8, clientes.getDepartamento());
-            ps.setString(9, clientes.getDistrito());
-            ps.setString(10, clientes.getDireccion());
-            ps.setBinaryStream(11, clientes.getFoto());
+            ps.setString(1, c.getDni());
+            ps.setString(2, c.getNombres());
+            ps.setString(3, c.getApellidos());
+            ps.setString(4, c.getDireccion());
+            ps.setString(5, c.getEmail());
+            ps.setString(6, c.getPass());
+            ps.setString(7, c.getTelefono());
+            ps.setString(8, c.getDistrito());
             ps.executeUpdate();
         } catch (Exception e) {
-            System.out.println("ERROR EN REGISTRO "+e.getMessage());
+        } finally {
+            try {
+                con.close();
+                ps.close();
+            } catch (Exception e) {
+            }
         }
-
+        return 1;
     }
-    
 
+    public int modificarCliente(Cliente c) {
+        int res = 0;
+        String sql = "UPDATE cliente SET Dni=?,Nombres=?,Apellidos=?,Direccion=?,Email=?,Password=?,Telefono=?,Distrito=?,Rol=?,Estado=? WHERE cliente.idCliente=?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, c.getDni());
+            ps.setString(2, c.getNombres());
+            ps.setString(3, c.getApellidos());
+            ps.setString(4, c.getDireccion());
+            ps.setString(5, c.getEmail());
+            ps.setString(6, c.getPass());
+            ps.setString(7, c.getTelefono());
+            ps.setString(8, c.getDistrito());
+            ps.setInt(9, c.getRol());
+            ps.setInt(10, c.getEstado());
+            ps.setInt(11, c.getId());
+            res = ps.executeUpdate();
+        } catch (Exception e) {
+        } finally {
+            try {
+                con.close();
+                ps.close();
+            } catch (Exception e) {
+            }
+        }
+        return res;
+    }
 
+    public int eliminarCliente(Cliente c) {
+        int rs = 0;
+        String sql = "DELETE FROM cliente WHERE idCliente=?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, c.getId());
+            rs = ps.executeUpdate();
+        } catch (Exception e) {
+        } finally {
+            try {
+                con.close();
+                ps.close();
+            } catch (Exception e) {
+            }
+        }
+        return rs;
+    }
+
+    public ArrayList<Cliente> ListarTodos() {
+        ArrayList<Cliente> lista = new ArrayList<>();
+
+        try {
+            String sql = "select * from Cliente where Rol=3 order by apellidos asc";
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Cliente c = new Cliente();
+                c.setId(rs.getInt("idCliente"));
+                c.setNombres(rs.getString("nombres"));
+                c.setApellidos(rs.getString("apellidos"));
+                lista.add(c);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (cn != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+        return lista;
+    }
 }
